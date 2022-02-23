@@ -1,0 +1,4 @@
+wheel
+python-dotenv
+apache-beam[gcp]
+tensorflow
