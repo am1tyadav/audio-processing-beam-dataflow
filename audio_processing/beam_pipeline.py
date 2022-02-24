@@ -18,7 +18,7 @@ def run():
     num_workers = os.getenv("NUM_WORKERS")
     data_input_path = os.getenv("DATA_INPUT_PATH")
     data_output_path = os.getenv("DATA_OUTPUT_PATH")
-    num_shards = os.getenv("NUM_SHARDS")
+    num_shards = int(os.getenv("NUM_SHARDS"))
     timestamp = str(datetime.utcnow().timestamp()).split(".")[0]
 
     pipeline_args = [
@@ -80,6 +80,6 @@ def run():
             | beam.io.WriteToTFRecord(
                 file_path_prefix=data_output_path,
                 file_name_suffix=".tfrecord",
-                num_shards=num_shards,
+                num_shards=num_shards
             )
         )
