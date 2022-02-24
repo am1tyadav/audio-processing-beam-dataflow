@@ -12,7 +12,6 @@ def run():
     region = os.getenv("REGION")
     staging_location = os.getenv("BEAM_STAGING_LOCATION")
     temp_location = os.getenv("BEAM_TEMP_LOCATION")
-    data_bucket = os.getenv("DATA_BUCKET")
     job_name = os.getenv("JOB_NAME")
     disk_size = os.getenv("DISK_SIZE")
     num_workers = os.getenv("NUM_WORKERS")
@@ -38,18 +37,18 @@ def run():
 
     class SplitInputText(beam.DoFn):
         def process(self, element, *args, **kwargs):
-            label_id, file_name = element.split(",")
-            yield int(label_id), file_name
+            label_id, blob_name = element.split(",")
+            yield int(label_id), blob_name
 
     class LoadAudioFromGCS(beam.DoFn):
         def setup(self):
             self.fs = GCSFileSystem(pipeline_options)
 
         def process(self, element, *args, **kwargs):
-            label, file_name = element
-            blob_name = f"{data_bucket}/{file_name}"
+            label, blob_name = element
+            blob_uri = f"gs://{blob_name}"
 
-            with self.fs.open(blob_name) as f:
+            with self.fs.open(blob_uri) as f:
                 data = f.read()
 
             decoded = tf.audio.decode_wav(data)
