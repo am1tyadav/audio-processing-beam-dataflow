@@ -12,6 +12,7 @@ def run():
     region = os.getenv("REGION")
     staging_location = os.getenv("BEAM_STAGING_LOCATION")
     temp_location = os.getenv("BEAM_TEMP_LOCATION")
+    bucket_name = os.getenv("BUCKET_NAME")
     job_name = os.getenv("JOB_NAME")
     disk_size = os.getenv("DISK_SIZE")
     num_workers = os.getenv("NUM_WORKERS")
@@ -46,7 +47,7 @@ def run():
 
         def process(self, element, *args, **kwargs):
             label, blob_name = element
-            blob_uri = f"gs://{blob_name}"
+            blob_uri = f"gs://{bucket_name}/{blob_name}"
 
             with self.fs.open(blob_uri) as f:
                 data = f.read()
