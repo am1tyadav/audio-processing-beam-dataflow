@@ -1,6 +1,6 @@
 # Using Apache Beam and Dataflow to Process Large Audio (or Other Media) Datasets
 
-Read the accompanying article for more details: [Using Apache Beam and Dataflow to Process Large Audio (or Other Media) Datasets](https://auditory.ai/using-apache-beam-and-dataflow-to-process-large-audio-or-other-media-datasets)
+Read the accompanying article for more details: [Using Apache Beam and Dataflow to Process Large Audio (or Other Media) Datasets](https://www.auditory.ai/using-apache-beam-and-dataflow-to-process-large-audio-or-other-media-datasets)
 
 When working with audio or media datasets, the size of the raw  dataset can be quite large, and it can be difficult to pre-process this data from its raw form to something which is more easily consumable in machine learning pipelines. Fortunately, data processing tasks can often be parallelized and Apache Beam is a great tool to do that.
 
